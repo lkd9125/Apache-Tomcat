@@ -1,0 +1,69 @@
+
+<th:block th:fragment="menu">
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="/" class="brand-link">
+        <img src="/image/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">AdminLTE 3</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="/image/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">Alexander Pierce</a>
+            </div>
+        </div>        
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+
+
+
+
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->                        
+            <li class="nav-item">
+                <a href="/dashboard" class="nav-link" id="menu-dashboard">
+                    <i class="bi bi-diagram-3-fill"></i>
+                    <p>메인</p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="/customer" class="nav-link" id="menu-customer">
+                    <i class="bi bi-building"></i>
+                    <p>거래처</p>
+                </a>
+            </li>
+            
+            <li class="nav-item">
+                <a href="/product" class="nav-link" id="menu-product">
+                    <i class="bi bi-pci-card"></i>
+                    <p>제품</p>
+                </a>
+            </li>
+
+            
+
+            <li class="nav-item">
+                <a href="/specification" class="nav-link" id="menu-specification">
+                    <!-- <i class="nav-icon bi-file-earmark-bar-graph-fill"></i> -->
+                    <i class="bi bi-file-bar-graph-fill"></i>
+                    <p>명세서</p>
+                </a>
+            </li>            
+
+            <br>
+        </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+    </aside>
+</th:block>

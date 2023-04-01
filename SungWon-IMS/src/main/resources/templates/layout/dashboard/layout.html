@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>Ims</title>
+<th:bloc th:replace="./layout/dashboard/config::config"></th:bloc>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed" style="height: auto;">
+	<div class="wrapper">
+		<th:bloc th:replace="./layout/dashboard/header::header"></th:bloc>
+
+		<th:bloc th:replace="./layout/dashboard/menu::menu"></th:bloc>
+
+		<th:bloc layout:fragment="content"></th:bloc>
+	</div>
+</body>
+</html>

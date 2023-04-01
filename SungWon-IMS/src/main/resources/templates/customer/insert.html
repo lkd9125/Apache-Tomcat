@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko" layout:decorate="~{layout/dashboard/layout}">        
+    <div class="content-wrapper" layout:fragment="content">
+        <input type="hidden" id="menu-active" value="menu-customer" />
+        <!-- 메인 컨텐츠 영역 -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>거래처 추가</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/">메인화면</a></li>
+                        <li class="breadcrumb-item active">거래처추가</li>
+                    </ol>
+                </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title">거래처 추가</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <form id="customer_check" action="/customer/insert" method="POST">
+                                <div class="row">
+                                    <div class="col-md-7">                                    
+                                        <div class="form-group">
+                                            <label for="company_number">사업자 번호</label>
+                                            <input type="text" class="form-control" id="company_number" name="company_number" placeholder="사업자번호">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-2">
+                                        <label for="company_check"></label>
+                                        <button type="button" id="company_check" class="btn btn-block btn-outline-primary">사업자 번호 확인</button>
+                                    </div>
+                                </div>
+                                <div class="row">                                    
+                                    <div class="col-md-4">                                    
+                                        <div class="form-group">
+                                            <label for="name">업체명</label>
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="업체명">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">                                    
+                                        <div class="form-group">
+                                            <label for="ceo">대표자 명</label>
+                                            <input type="text" class="form-control" id="ceo" name="ceo" placeholder="대표자 명">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="tel">전화번호</label>
+                                            <input type="text" class="form-control" id="tel" name="tel" placeholder="전화번호">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="tel">이메일</label>
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="이메일">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <!-- TODO: 나중에 Select Option으로 고도화 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="tel">업태</label>
+                                            <input type="text" class="form-control" id="business" name="business"  placeholder="업태">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="tel">업종</label>
+                                            <input type="text" class="form-control" id="sectors" name="sectors" placeholder="업종">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="address">주소</label>
+                                            <input type="text" class="form-control" id="address" name="address" placeholder="주소">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                
+                                
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">등록하기</button>
+                                </div>                                                                                               
+                            </form>
+                        </div>  
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <!-- 스크립트 영역 -->
+        <script th:inline="javascript">
+            $.validator.setDefaults({
+                submitHandler: function () {
+                    form.submit();
+                }
+            });                    
+            $('#customer_check').validate({
+                rules: {     
+                    // name 값을 넣으면 됨
+                    company_number: {
+                        required: true,                    
+                    },
+                    name: {
+                        required: true
+                    },
+                    ceo: {
+                        required: true
+                    },
+                    tel: {
+                        required: true
+                    },
+                    email: {
+                        required: true,
+                        email: true,
+                    },
+                    business: {
+                        required: true
+                    },
+                    sectors: {
+                        required: true
+                    },
+                    address: {
+                        required: true
+                    },
+                },
+                messages: {
+                    company_number: {
+                        required: "사업자 번호를 입력해주세요.",                        
+                    },
+                    name: {
+                        required: "업체명을 입력해주세요.",                        
+                    },
+                    ceo: {
+                        required: "대표자를 입력해주세요.",                        
+                    },
+                    tel: {
+                        required: "연락처를 입력해주세요.",                        
+                    },
+                    email: {
+                        required: "이메일을 입력해주세요.",
+                        email: "이메일 형식에 맞게 입력해주세요."
+                    },
+                    business: {
+                        required: "업태를 입력해주세요.",                       
+                    },
+                    sectors: {
+                        required: "업종을 입력해주세요.",                       
+                    },
+                    address: {
+                        required: "주소를 입력해주세요.",                       
+                    },
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+                
+        </script>
+        
+    </div>
+</html>

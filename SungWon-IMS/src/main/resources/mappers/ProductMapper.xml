@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sungwon.ims.dao.ProductMapper">
+
+    <select id="getProductList" parameterType="Integer" resultType="ProductVO">
+        SELECT p.*, c.name as customer_name
+        FROM product p
+        INNER JOIN customer c 
+	        ON p.customer_idx = c.idx 
+        <if test="customer_idx > 0">
+            WHERE customer_idx = #{customer_idx}
+        </if>
+    </select>
+
+    <insert id="insertProduct" parameterType="ProductVO">
+        INSERT INTO product
+        VALUES (null, #{customer_idx}, #{name}, #{price}, #{description})
+    </insert>
+</mapper>

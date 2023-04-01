@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 30초마다 설정 파일의 변경을 확인하고, 파일이 변경되면 다시 로딩 -->
+<configuration scan="true" scanPeriod="30 seconds">
+	
+<conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+
+	<!-- console에 로그 -->
+	<appender name="STDOUT"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%clr(%d{yyyyMMdd HH:mm:ss.SSS}){magenta} %clr([%thread]){blue} %clr(%-3level){} %clr(%logger{5}){cyan}- %msg %n</Pattern>
+		</layout>
+	</appender>	
+
+<!-- 
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>./logs/error.log</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			
+			
+			<fileNamePattern>D:\\logs\\ming-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<fileNamePattern>./logs/%d{yyyy-MM-dd}.%i- error.log</fileNamePattern>
+			
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>5MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			
+			<maxHistory>10</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} %level [%logger] - %msg%n
+			</Pattern>
+		</encoder>
+	</appender>
+-->
+
+	<logger name="jdbc" level="OFF"/>
+
+  
+
+	<logger name="jdbc.sqlonly" level="OFF"/>
+  
+	<logger name="jdbc.sqltiming" level="INFO"/>
+  
+	<logger name="jdbc.audit" level="OFF"/>
+  
+	<logger name="jdbc.resultset" level="OFF"/>
+  
+	<logger name="jdbc.resultsettable" level="INFO"/>
+  
+	<logger name="jdbc.connection" level="OFF"/>
+
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+	</root>
+
+</configuration>

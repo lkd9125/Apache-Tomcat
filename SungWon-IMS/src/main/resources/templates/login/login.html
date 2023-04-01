@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/login/layout}">    
+<div class="login-box" layout:fragment="content">
+    <div class="login-logo">
+        <a href="/"><b>SeongWon</b>-IMS</a>
+    </div>
+    
+    <div class="card">
+        <div class="card-body login-card-body">
+            <p class="login-box-msg">Sign in to start your session</p>
+
+            <form action="/login" method="POST" onsubmit="return submitok()">
+
+                <div class="input-group mb-3">
+                    <input type="text" id="username" name="username" class="form-control" placeholder="Username">
+                    <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-envelope"></span>
+                    </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" id="password" class="form-control" placeholder="Password">
+                    <input type="hidden" id="rsa_password" name="password">
+                    <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8"></div>
+                    <!-- /.col -->
+                    <div class="col-4">
+                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+
+            </form>            
+            <!-- /.social-auth-links -->
+
+            <p class="mb-1">
+                <a href="#">I forgot my password</a>
+            </p>
+            <p class="mb-0">
+                <a href="/signPage" class="text-center">Register a new membership</a>
+            </p>
+            <p class="mb-1">
+                <a href="#">go Dashboard</a>
+            </p>                                    
+        </div>
+    <!-- /.login-card-body -->
+    </div>
+
+    <script th:inline="javascript">
+        
+        $(function () {
+            let msg = [[${msg}]];
+
+            console.log(msg.length);
+
+            if(msg.length > 0){
+                msg = msg.trim();
+
+                console.log(msg.length);
+            }
+
+            if(msg != null && msg != '' && msg != "null"){
+                alert(msg);
+                
+            }
+        });
+
+        function submitok(){
+            if($("#username").val() == null || $("#username").val() == ''){
+                alert('아이디를 입력해주세요.');
+                return false;
+            } else if($("#password").val() == null || $("#password").val() == ''){
+                alert('비밀번호를 입력해주세요.');
+                return false;
+            } 
+
+            let rsa = new RSAKey();
+            rsa.setPublic([[${modulus}]], [[${exponent}]]);
+            
+            $("#rsa_password").val(rsa.encrypt($("#password").val()));            
+            
+            console.log(rsa);
+
+            return true;
+        }
+
+
+    </script>
+</div>
+<!-- /.login-box -->
+
+</html>

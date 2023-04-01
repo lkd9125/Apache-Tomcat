@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko" layout:decorate="~{layout/dashboard/layout}">    
+    <div class="content-wrapper" layout:fragment="content">
+        <input type="hidden" id="menu-active" value="menu-product" />
+        <!-- 메인 컨텐츠 영역 -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>제품추가</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/">메인화면</a></li>
+                        <li class="breadcrumb-item active">제품추가</li>
+                    </ol>
+                </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        
+        <section class="content">
+            <div class="container-fluid">
+
+            
+                <div class="row">     
+                    
+                    <div class="col-md-3"></div>
+                    
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">                            
+                                <div class="card card-secondary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">제품추가</h3>                                    
+                                    </div>
+                                    <form id="product_check" action="/product/insert" method="POST">                                        
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <th:block th:if="${vo == null}">
+                                                        <div class="form-group">
+                                                            <label>거래처</label>
+                                                            <select id="customer_list" name="customer_idx" class="form-control select2" style="width: 100%;">
+                                                                <th:block th:each="list, listState: ${list}">
+                                                                    <option th:value="${list.idx}">[[${list.name}]]</option>
+                                                                </th:block>                                                       
+                                                            </select>
+                                                        </div>
+                                                    </th:block>
+
+                                                    <th:block th:if="${vo != null}">
+                                                        <div class="form-group">
+                                                            <label for="customer_idx">거래처</label>
+                                                            <input type="text" id="customer_idx" th:value="${vo.name}" class="form-control">
+                                                            <input type="hidden" name="customer_idx" th:value="${vo.idx}" class="form-control">
+                                                        </div>
+                                                    </th:block>
+                                                </div>
+                                            </div>
+                                                                                
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="name">제품명</label>
+                                                        <input type="text" id="name" name="name" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="price">단가</label>
+                                                        <input type="number" id="price" name="price" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="description">제품설명</label> 
+                                                        <input type="text" id="description" name="description" class="form-control" maxlength="49">
+                                                        <span style="font-size: 7px;">* 제품설명 작성은 선택사항 입니다.</span><br>
+                                                        <span style="font-size: 7px;">* 50자 이내로 작성해주세요.</span>
+                                                    </div>   
+                                                </div>
+                                            </div>                                 
+
+                                            <div class="form-group">
+                                                <a href="javascript:history.back()" class="btn btn-secondary">뒤로가기</a>
+                                                <input type="submit" value="제품추가하기" class="btn btn-success float-right">
+                                            </div>
+                                        </div>
+                                    </form>
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3"></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 스크립트 영역 -->
+        <script th:inline="javascript">
+            $('.select2').select2();            
+
+            $.validator.setDefaults({
+                submitHandler: function () {
+                    form.submit();
+                }
+            });                    
+            $('#product_check').validate({
+                rules: {     
+                    // name 값을 넣으면 됨
+                    customer_idx: {
+                        required: true,                    
+                    },
+                    name: {
+                        required: true
+                    },
+                    price: {
+                        required: true
+                    },
+                    description: {
+                        required: false
+                    },                    
+                },
+                messages: {
+                    customer_idx: {
+                        required: "거래처를 선택해주세요.",                        
+                    },
+                    name: {
+                        required: "제품명을 입력해주세요.",                        
+                    },
+                    price: {
+                        required: "단가를 입력해주세요.",                        
+                    },                                    
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+            
+        </script>
+        
+    </div>
+</html>

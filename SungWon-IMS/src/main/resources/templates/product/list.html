@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko" layout:decorate="~{layout/dashboard/layout}">    
+  <div class="content-wrapper" layout:fragment="content">
+      <input type="hidden" id="menu-active" value="menu-product" />
+        <!-- 메인 컨텐츠 영역 -->
+
+        <section class="content-header">
+            <div class="container-fluid">
+              <div class="row mb-2">
+                <div class="col-sm-6">
+                  <h1>제품 목록</h1>
+                </div>
+                <div class="col-sm-6">
+                  <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/dashboard">메인화면</a></li>
+                    <li class="breadcrumb-item active">제품</li>
+                  </ol>
+                </div>
+              </div>
+            </div><!-- /.container-fluid -->
+          </section>
+        
+        <div class="content">
+            <div class="container-fliuid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            
+                            <!-- /.card-header -->
+                            <div class="card-body">
+
+                              <table id="datatable" class="table table-bordered table-hover">
+
+                                <colgroup>
+                                  <col width="5%" />
+                                  <col width="15%" />
+                                  <col width="15%" />
+                                  <col width="10%" />
+                                  <col width="55%" />					
+                                </colgroup>
+
+                                <thead>
+                                    <tr>
+                                      <th>#</th>
+                                      <th>거래처</th>
+                                      <th>제품 이름</th>
+                                      <th>단가</th>
+                                      <th>설명</th>
+                                    </tr>
+                                </thead>
+                
+                                <tbody>
+                                
+                                </tbody>   
+
+                              </table>
+
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+        
+        <!-- 스크립트 영역 -->
+        <script th:inline="javascript">
+          $(function () {
+              let msg = [[${msg}]];              
+
+              if(msg != null && msg != '' && msg != "null"){
+                  alert(msg);
+                  
+              }
+          });
+
+          let column = 
+              [{
+              data : 'idx',
+              }, {
+              data : 'customer_name',
+              }, {
+              data : 'name',
+              }, {
+              data : 'price',
+              }, {
+              data : 'description',
+              },
+            ];
+
+          dataTableOpt.ajax = {
+            url : "/product/data",
+            type : "GET"
+          }
+          dataTableOpt.dom = '<"top"Bil>rt<"bottom"fp><"clear">';
+          dataTableOpt.columns = column;        
+          dataTableOpt.buttons = [
+            {
+                text : '<i class="fa fa-edit fa-fw" aria-hidden="true"></i> 등록 ',
+                className : 'btn-primary',
+                action : function(e, dt, node, config) {
+                location.href = location.href + '/insert';
+				      }
+            }
+          ]
+
+          var table = $('#datatable').DataTable(dataTableOpt);
+
+            $('#datatable tbody').on('click', 'tr', function () {
+                var data = table.row( this ).data();              
+                
+                if(typeof data != "undefined"){
+                    confirm("해당 제품을 삭제하시겠습니까?");
+                }
+
+            });
+            
+        </script>
+        
+    </div>
+</html>

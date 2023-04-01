@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko" layout:decorate="~{layout/dashboard/layout}">    
+    <div class="content-wrapper" layout:fragment="content">
+        <input type="hidden" id="menu-active" value="menu-specification" />
+        <!-- 메인 컨텐츠 영역 -->               
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>명세서 추가</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/">메인화면</a></li>
+                        <li class="breadcrumb-item active">명세서 추가</li>
+                    </ol>
+                </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">공급자 ([[${session.company.name}]]) </h3>
+                        </div>
+                        <!-- /.card-header -->
+                        
+                        <!-- /.card-body -->
+                        <div class="card-body">
+                            <div class="row">                            
+                                <div class="col-md-7">                                    
+                                    <div class="form-group">
+                                        <label for="company_number">사업자 번호</label>
+                                        <input type="text" class="form-control" id="company_number" name="company_number" th:value="${session.company.company_number}" readonly>
+                                        
+                                    </div>
+                                </div>                                
+                            </div>
+                            <div class="row">                                    
+                                <div class="col-md-4">                                    
+                                    <div class="form-group">
+                                        <label for="name">업체명</label>
+                                        <input type="text" class="form-control" id="name" name="name" th:value="${session.company.name}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">                                    
+                                    <div class="form-group">
+                                        <label for="ceo">대표자 명</label>
+                                        <input type="text" class="form-control" id="ceo" name="ceo" th:value="${session.company.ceo}" readonly>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="tel">전화번호</label>
+                                        <input type="text" class="form-control" id="tel" name="tel" th:value="${session.company.tel}" readonly>
+                                    </div>
+                                </div>
+    
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="tel">이메일</label>
+                                        <input type="email" class="form-control" id="email" name="email" th:value="${session.company.email}" readonly>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <!-- TODO: 나중에 Select Option으로 고도화 -->
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="tel">업태</label>
+                                        <input type="text" class="form-control" id="business" name="business"  th:value="${session.company.business}" readonly>
+                                    </div>
+                                </div>
+    
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="tel">업종</label>
+                                        <input type="text" class="form-control" id="sectors" name="sectors" th:value="${session.company.sectors}" readonly>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="address">주소</label>
+                                        <input type="text" class="form-control" id="address" name="address" th:value="${session.company.address}" readonly>
+                                    </div>
+                                </div>
+                            </div>                                
+                        </div>                                                                                                    
+                    </div>
+                </div>
+
+                <div class="col-md-1" style="text-align: center;">-></div>
+
+                <div class="col-md-6">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">공급자 받는 자</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        
+                        <!-- /.card-body -->
+                        <div class="card-body">
+                            <div class="row">                            
+                                <div class="col-md-7">                                    
+                                    <div class="form-group">
+                                        <label>업체명</label>
+                                        <select id="customer_info" class="form-control select2" style="width: 100%;">
+                                            <th:block th:each="list, listState: ${list}">
+                                                <option th:value="${list.idx}">[[${list.name}]]</option>
+                                            </th:block>   
+                                        </select>
+                                    </div>
+                                </div>                                
+                            </div>
+                            <div class="row">                                    
+                                <div class="col-md-4">                                    
+                                    <div class="form-group">
+                                        <label for="customer_number">사업자 번호</label>
+                                        <input type="text" class="form-control" id="customer_number" placeholder="사업자번호" readonly />                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-4">                                    
+                                    <div class="form-group">
+                                        <label for="customer_ceo">대표자 명</label>
+                                        <input type="text" class="form-control" id="customer_ceo" placeholder="대표자 명" readonly />
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="customer_tel">전화번호</label>
+                                        <input type="text" class="form-control" id="customer_tel" placeholder="전화번호" readonly />
+                                    </div>
+                                </div>
+    
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="customer_email">이메일</label>
+                                        <input type="email" class="form-control" id="customer_email" placeholder="이메일" readonly />
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <!-- TODO: 나중에 Select Option으로 고도화 -->
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="customer_business">업태</label>
+                                        <input type="text" class="form-control" id="customer_business" placeholder="업태" readonly />
+                                    </div>
+                                </div>
+    
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="customer_sectors">업종</label>
+                                        <input type="text" class="form-control" id="customer_sectors" placeholder="업종" readonly />
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="customer_address">주소</label>
+                                        <input type="text" class="form-control" id="customer_address" placeholder="주소" readonly />
+                                    </div>
+                                </div>
+                            </div>                                
+                        </div>                                                                                                    
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-primary">
+
+                        <div class="card-header">
+                            <h3 class="card-title">제품</h3>
+                        </div>
+
+                        <div id="product_list" class="card-body">
+                            <div class="row">                                
+                                <div class="col-md-6">
+                                    <label>제품</label>
+                                    <select id="product_name" class="form-control select2" style="width: 100%;">
+                                        <th:block th:each="list, listState: ${list}">
+                                            <option th:value="${list.idx}">[[${list.name}]]</option>
+                                        </th:block>   
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="address">제품 단가</label>
+                                        <input type="text" class="form-control" id="product_price" placeholder="제품 단가">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="address">수량</label>
+                                        <input type="number" class="form-control" id="ea" placeholder="수량">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>                        
+                </div>
+            </div>
+        </div>
+        
+        
+        <!-- 스크립트 영역 -->
+        <script th:inline="javascript">
+            let customer_list = [[${list}]]
+            let product_list = [];
+
+            $('#customer_info').select2(); 
+            $('#product_name').select2();
+
+            $("#customer_info").change(() => {                                                
+                let customer = customer_list.find((e) => {return e.idx == $("#customer_info").val()});                
+                $("#customer_number").val(customer.company_number);
+                $("#customer_ceo").val(customer.ceo);
+                $("#customer_tel").val(customer.tel);
+                $("#customer_email").val(customer.email);
+                $("#customer_business").val(customer.business);
+                $("#customer_sectors").val(customer.sectors);
+                $("#customer_address").val(customer.address);
+            });
+        </script>
+        
+    </div>
+</html>
